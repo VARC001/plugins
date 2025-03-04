@@ -15,7 +15,7 @@ from . import START_MSG, Config, Symbols, db, VXSTORM
 
 
 # Existing session menu command
-@VXSTORM.bot.on_message(
+@VXSTORM.on_message(
     filters.command("session") & Config.AUTH_USERS & filters.private
 )
 async def session_menu(_, message: Message):
@@ -26,7 +26,7 @@ async def session_menu(_, message: Message):
 
 
 # New command to add session string manually
-@VXSTORM.bot.on_message(filters.command("add") & Config.AUTH_USERS & filters.private)
+@VXSTORM.on_message(filters.command("add") & Config.AUTH_USERS & filters.private)
 async def add_session(_, message: Message):
     parts = message.text.split(" ", 1)
     if len(parts) < 2 or not parts[1]:
@@ -52,7 +52,7 @@ async def add_session(_, message: Message):
         await message.reply_text(f"**[ᴇʀʀᴏʀ]** {e}")
 
 # Existing command to create a new session
-@VXSTORM.bot.on_message(filters.regex(r"ʀᴇɢɪꜱᴛᴇʀ ɴᴇᴡ 🔗") & Config.AUTH_USERS & filters.private)
+@VXSTORM.on_message(filters.regex(r"ʀᴇɢɪꜱᴛᴇʀ ɴᴇᴡ 🔗") & Config.AUTH_USERS & filters.private)
 async def new_session(_, message: Message):
     await message.reply_text(
         "**ꜱᴇᴛᴜᴘ ᴀ ɴᴇᴡ ꜱᴇꜱꜱɪᴏɴ**",
@@ -75,7 +75,7 @@ async def new_session(_, message: Message):
 
 
 # Existing delete session command
-@VXSTORM.bot.on_message(
+@VXSTORM.on_message(
     filters.regex(r"ᴅᴇʟᴇᴛᴇ 🗑️") & Config.AUTH_USERS & filters.private
 )
 async def delete_session(_, message: Message):
@@ -97,7 +97,7 @@ async def delete_session(_, message: Message):
 
 
 # Existing callback query handler to remove session
-@VXSTORM.bot.on_callback_query(filters.regex(r"rm_session"))
+@VXSTORM.on_callback_query(filters.regex(r"rm_session"))
 async def rm_session_cb(client: Client, cb: CallbackQuery):
     collection = []
     user_id = int(cb.data.split(":")[1])
@@ -130,7 +130,7 @@ async def rm_session_cb(client: Client, cb: CallbackQuery):
 
     await cb.message.edit_reply_markup(InlineKeyboardMarkup(buttons))
 
-@VXSTORM.bot.on_message(filters.regex(r"ʜᴏᴍᴇ 📲") & filters.private & Config.AUTH_USERS)
+@VXSTORM.on_message(filters.regex(r"ʜᴏᴍᴇ 📲") & filters.private & Config.AUTH_USERS)
 async def go_home(_, message: Message):
     await message.reply_text(
         START_MSG.format(message.from_user.mention),
@@ -138,7 +138,7 @@ async def go_home(_, message: Message):
         reply_markup=InlineKeyboardMarkup(start_button()),
     )
 
-@VXSTORM.bot.on_message(filters.regex(r"ᴄᴏɴɴᴇᴄᴛ ꜱᴇꜱꜱɪᴏɴ 📡") & Config.AUTH_USERS & filters.private)
+@VXSTORM.on_message(filters.regex(r"ᴄᴏɴɴᴇᴄᴛ ꜱᴇꜱꜱɪᴏɴ 📡") & Config.AUTH_USERS & filters.private)
 async def session_add(_, message: Message):
     await message.reply_text("/add {ᴘᴀsᴛᴇ ʏᴏᴜʀ sᴇssɪᴏɴ}")  
     
