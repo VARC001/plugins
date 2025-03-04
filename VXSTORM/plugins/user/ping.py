@@ -22,7 +22,7 @@ async def ping(client: Client, message: Message):
     speed = end_time - start_time
     caption = await ping_template(round(speed, 3), uptime, client.me.mention)
     if img:
-        PIC = "https://envs.sh/Pa1.mp4"
+        PIC = "./VXSTORM/resources/10be4ad7c462397a91d63.mp4"
         img = random.choice(img.split(" "))
         if img.endswith(".mp4"):
             await message.reply_video(
