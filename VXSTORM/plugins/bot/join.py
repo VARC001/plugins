@@ -42,7 +42,7 @@ MUST_JOIN = "STORM_TECHH"
 MUST_JOIN2 = "STORM_CORE"
 
 #------------------------
-@VXSTORM.bot.on_message(filters.incoming & filters.private, group=-1)
+@VXSTORM.on_message(filters.incoming & filters.private, group=-1)
 async def must_join_channel(app: Client, msg: Message):
     if not MUST_JOIN:
         return
