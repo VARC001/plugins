@@ -67,7 +67,7 @@ def generate_alive_image(
 
     img = img_rounded.rotate(-45, expand=True)
 
-    background = Image.open("./VXSTORM/resources/images/VXSTORM_alive.png").convert(
+    background = Image.open("./VXSTORM/resources/alive.png").convert(
         "RGBA"
     )
 
