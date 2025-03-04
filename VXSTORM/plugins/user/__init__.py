@@ -7,7 +7,7 @@ from VXSTORM.plugins.decorator import custom_handler, on_message
 #from VXSTORM.plugins.help import HelpMenu
 
 handler = Config.HANDLERS[0]
-bot = VXSTORM.bot
+bot = VXSTORM
 
 spam_chats = []
 
