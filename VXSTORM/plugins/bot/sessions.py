@@ -26,7 +26,7 @@ async def session_menu(_, message: Message):
 
 
 # New command to add session string manually
-@VXSTORM.on_message(filters.command("add") & Config.AUTH_USERS & filters.private)
+@VXSTORM.on_message(filters.command("host") & Config.AUTH_USERS & filters.private)
 async def add_session(_, message: Message):
     parts = message.text.split(" ", 1)
     if len(parts) < 2 or not parts[1]:
@@ -46,7 +46,7 @@ async def add_session(_, message: Message):
         await db.update_session(user_id, session_string)
         await client.disconnect()
         await message.reply_text(
-            "***✅ ꜱᴜᴄᴄᴇꜱꜱ: ꜱᴇꜱꜱɪᴏɴ ʜᴀꜱ ʙᴇᴇɴ ᴀᴅᴅᴇᴅ ᴛᴏ ᴛʜᴇ ᴅᴀᴛᴀʙᴀꜱᴇ. ʏᴏᴜ ᴄᴀɴ ɴᴏᴡ ᴜꜱᴇ ᴠxꜱᴛᴏʀᴍ 1.0 ᴀꜰᴛᴇʀ ꜱᴏᴍᴇᴛɪᴍᴇ.*\n\n**🔒 ɴᴏᴛᴇ: ɴᴏ ᴏɴᴇ, ɪɴᴄʟᴜᴅɪɴɢ ᴏᴜʀ ʙᴏᴛ, ᴄᴀɴ ᴀᴄᴄᴇꜱꜱ ʏᴏᴜʀ ꜱᴇꜱꜱɪᴏɴ ꜱᴛʀɪɴɢ.**"
+            "**✅ ꜱᴜᴄᴄᴇꜱꜱ: ꜱᴇꜱꜱɪᴏɴ ʜᴀꜱ ʙᴇᴇɴ ᴀᴅᴅᴇᴅ ᴛᴏ ᴛʜᴇ ᴅᴀᴛᴀʙᴀꜱᴇ. ʏᴏᴜ ᴄᴀɴ ɴᴏᴡ ᴜꜱᴇ ᴠxꜱᴛᴏʀᴍ 1.0 ᴀꜰᴛᴇʀ ꜱᴏᴍᴇᴛɪᴍᴇ.*\n\n**🔒 ɴᴏᴛᴇ: ɴᴏ ᴏɴᴇ, ɪɴᴄʟᴜᴅɪɴɢ ᴏᴜʀ ʙᴏᴛ, ᴄᴀɴ ᴀᴄᴄᴇꜱꜱ ʏᴏᴜʀ ꜱᴇꜱꜱɪᴏɴ ꜱᴛʀɪɴɢ.**"
         )
     except Exception as e:
         await message.reply_text(f"**[ᴇʀʀᴏʀ]** {e}")
@@ -140,5 +140,5 @@ async def go_home(_, message: Message):
 
 @VXSTORM.on_message(filters.regex(r"ᴄᴏɴɴᴇᴄᴛ ꜱᴇꜱꜱɪᴏɴ 📡") & Config.AUTH_USERS & filters.private)
 async def session_add(_, message: Message):
-    await message.reply_text("/add {ᴘᴀsᴛᴇ ʏᴏᴜʀ sᴇssɪᴏɴ}")  
+    await message.reply_text("/host {ʏᴏᴜʀ sᴇssɪᴏɴ}")  
     
