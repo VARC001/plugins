@@ -60,7 +60,10 @@ class PbxClient(Client):  # Inherit from pyrogram.Client
                 continue
 
     async def start_bot(self) -> None:
-        await self.start()  # Start the Pyrogram client
+        retries = 3  # Number of retries for database lock
+        for attempt in range(retries):
+            try:
+                await self.start() # Start the Pyrogram client
         me = await self.get_me()
         LOGS.info(
             f"{Symbols.arrow_right * 2} ꜱᴛᴀʀᴛᴇᴅ VXSTORM ᴄʟɪᴇɴᴛ: '{me.username}' {Symbols.arrow_left * 2}"
