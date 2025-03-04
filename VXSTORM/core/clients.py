@@ -107,23 +107,23 @@ class PbxClient(Client):
         except Exception:
             return False
 
-    async def start_message(self, version: dict) -> None:
-        await self.bot.send_animation(
-            Config.LOGGER_ID,
-            #"https://envs.sh/Olk.jpg",
-            f"**{Symbols.triangle_right}  ᴘʏʀᴏɢʀᴀᴍ ᴠᴇʀꜱɪᴏɴ** `{version['pyrogram']}`\n"
-            f"**{Symbols.triangle_right}  ᴘʏᴛʜᴏɴ ᴠᴇʀꜱɪᴏɴ** `{version['python']}`\n\n",
-            parse_mode=ParseMode.MARKDOWN,
-            disable_notification=True,
-            reply_markup=InlineKeyboardMarkup(
+async def start_message(self, version: dict) -> None:
+    await self.bot.send_message(
+        Config.LOGGER_ID,
+        f"**{Symbols.triangle_right}  ᴘʏʀᴏɢʀᴀᴍ ᴠᴇʀꜱɪᴏɴ** `{version['pyrogram']}`\n"
+        f"**{Symbols.triangle_right}  ᴘʏᴛʜᴏɴ ᴠᴇʀꜱɪᴏɴ** `{version['python']}`\n\n",
+        parse_mode=ParseMode.MARKDOWN,
+        disable_notification=True,
+        reply_markup=InlineKeyboardMarkup(
+            [
                 [
-                    [
-                        InlineKeyboardButton("ꜱᴜᴘᴘᴏʀᴛ",  url="https://t.me/STORM_CORE"),
-                        InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇꜱ",  url="https://t.me/STORM_TECHH"),
-                    ]
+                    InlineKeyboardButton("ꜱᴜᴘᴘᴏʀᴛ",  url="https://t.me/STORM_CORE"),
+                    InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇꜱ",  url="https://t.me/STORM_TECHH"),
                 ]
-            ),
-        )
+            ]
+        ),
+    )
+
 
     async def startup(self) -> None:
         LOGS.info(
