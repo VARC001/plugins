@@ -23,8 +23,8 @@ class Config:
     FORCESUBS = filters.chat()
 
     # github related configs
-    PLUGINS_REPO = getenv("PLUGINS_REPO", "https://github.com/VARC001/plugins")
-    DEPLOY_REPO = getenv("DEPLOY_REPO", "Badhacker98/PBX_2.0")
+    PLUGINS_REPO = getenv("PLUGINS_REPO", "VARC001/plugins")
+    DEPLOY_REPO = getenv("DEPLOY_REPO", "VARC001/STORM")
     
     # storage dir: you may or may not edit
     DWL_DIR = "./downloads/"
