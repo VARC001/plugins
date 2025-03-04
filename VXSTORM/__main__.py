@@ -15,7 +15,7 @@ from VXSTORM.functions.utility import BList, Flood, TGraph
 
 
 async def main():
-    await VXSTORM.startup()
+    await VXSTORM.start()  # Changed from startup() to start()
     await db.connect()
     await UserSetup()
     await ForcesubSetup()
