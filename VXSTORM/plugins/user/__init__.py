@@ -4,7 +4,7 @@ from VXSTORM.core.clients import Pbxbot
 from VXSTORM.core.config import Config, Symbols
 from VXSTORM.core.database import db
 from VXSTORM.plugins.decorator import custom_handler, on_message
-from VXSTORM.plugins.help import HelpMenu
+#from VXSTORM.plugins.help import HelpMenu
 
 handler = Config.HANDLERS[0]
 bot = Pbxbot.bot
