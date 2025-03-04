@@ -59,22 +59,12 @@ class PbxClient(Client):  # Inherit from pyrogram.Client
                 LOGS.error(f"{i + 1}: {e}")
                 continue
 
-async def start_bot(self) -> None:
-    retries = 3  # Number of retries for database lock
-    for attempt in range(retries):
-        try:
-            await self.start()  # Start the Pyrogram client
-            me = await self.get_me()
-            LOGS.info(
-                f"{Symbols.arrow_right * 2} ꜱᴛᴀʀᴛᴇᴅ VXSTORM ᴄʟɪᴇɴᴛ: '{me.username}' {Symbols.arrow_left * 2}"
-            )
-            break
-        except sqlite3.OperationalError as e:
-            if "database is locked" in str(e) and attempt < retries - 1:
-                LOGS.warning(f"Database is locked. Retrying ({attempt + 1}/{retries})...")
-                await asyncio.sleep(1)  # Wait before retrying
-            else:
-                raise e
+    async def start_bot(self) -> None:
+        await self.start()  # Start the Pyrogram client
+        me = await self.get_me()
+        LOGS.info(
+            f"{Symbols.arrow_right * 2} ꜱᴛᴀʀᴛᴇᴅ VXSTORM ᴄʟɪᴇɴᴛ: '{me.username}' {Symbols.arrow_left * 2}"
+        )
 
     async def load_plugin(self) -> None:
         count = 0
@@ -224,5 +214,3 @@ class CustomMethods(PbxClient):
         if status and status.lower() == "true":
             await self._log(tag, text, file)
 
-
-VXSTORM = CustomMethods()
