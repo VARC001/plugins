@@ -4,7 +4,7 @@ from pyrogram.types import Message
 from . import Config, Symbols, VXSTORM
 
 
-@VXSTORM.bot.on_message(
+@VXSTORM.on_message(
     filters.command("auth") & Config.AUTH_USERS
 )
 async def addauth(client: Client, message: Message):
@@ -32,7 +32,7 @@ async def addauth(client: Client, message: Message):
     await message.reply_text(f"**ᴀᴅᴅᴇᴅ {user.mention} ᴛᴏ ᴀᴜᴛʜ ᴜꜱᴇʀꜱ!**")
 
 
-@VXSTORM.bot.on_message(
+@VXSTORM.on_message(
     filters.command("unauth") & Config.AUTH_USERS
 )
 async def delauth(client: Client, message: Message):
@@ -57,7 +57,7 @@ async def delauth(client: Client, message: Message):
         await message.reply_text(f"**{user.mention} ɪꜱ ɴᴏᴛ ᴀᴜᴛʜᴏʀɪᴢᴇᴅ**")
 
 
-@VXSTORM.bot.on_message(
+@VXSTORM.on_message(
     filters.command("authlist") & Config.AUTH_USERS
 )
 async def authlist(client: Client, message: Message):
