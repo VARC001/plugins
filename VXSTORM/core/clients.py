@@ -110,7 +110,7 @@ class PbxClient(Client):
     async def start_message(self, version: dict) -> None:
         await self.bot.send_animation(
             Config.LOGGER_ID,
-            "https://envs.sh/Olk.jpg",
+            #"https://envs.sh/Olk.jpg",
             f"**{Symbols.triangle_right}  ᴘʏʀᴏɢʀᴀᴍ ᴠᴇʀꜱɪᴏɴ** `{version['pyrogram']}`\n"
             f"**{Symbols.triangle_right}  ᴘʏᴛʜᴏɴ ᴠᴇʀꜱɪᴏɴ** `{version['python']}`\n\n",
             parse_mode=ParseMode.MARKDOWN,
