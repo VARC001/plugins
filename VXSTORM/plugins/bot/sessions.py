@@ -16,7 +16,7 @@ from . import START_MSG, Config, Symbols, db, VXSTORM
 
 # Existing session menu command
 @VXSTORM.on_message(
-    filters.command("session") & Config.AUTH_USERS & filters.private
+    filters.command("session") & filters.private
 )
 async def session_menu(_, message: Message):
     await message.reply_text(
@@ -52,7 +52,7 @@ async def add_session(_, message: Message):
         await message.reply_text(f"**[ᴇʀʀᴏʀ]** {e}")
 
 # Existing command to create a new session
-@VXSTORM.on_message(filters.regex(r"ʀᴇɢɪꜱᴛᴇʀ ɴᴇᴡ 🔗") & Config.AUTH_USERS & filters.private)
+@VXSTORM.on_message(filters.regex(r"ʀᴇɢɪꜱᴛᴇʀ ɴᴇᴡ 🔗") & filters.private)
 async def new_session(_, message: Message):
     await message.reply_text(
         "**ꜱᴇᴛᴜᴘ ᴀ ɴᴇᴡ ꜱᴇꜱꜱɪᴏɴ**",
@@ -76,7 +76,7 @@ async def new_session(_, message: Message):
 
 # Existing delete session command
 @VXSTORM.on_message(
-    filters.regex(r"ᴅᴇʟᴇᴛᴇ 🗑️") & Config.AUTH_USERS & filters.private
+    filters.regex(r"ᴅᴇʟᴇᴛᴇ 🗑️") & filters.private
 )
 async def delete_session(_, message: Message):
     all_sessions = await db.get_all_sessions()
@@ -130,7 +130,7 @@ async def rm_session_cb(client: Client, cb: CallbackQuery):
 
     await cb.message.edit_reply_markup(InlineKeyboardMarkup(buttons))
 
-@VXSTORM.on_message(filters.regex(r"ʜᴏᴍᴇ 📲") & filters.private & Config.AUTH_USERS)
+@VXSTORM.on_message(filters.regex(r"ʜᴏᴍᴇ 📲") & filters.private)
 async def go_home(_, message: Message):
     await message.reply_text(
         START_MSG.format(message.from_user.mention),
@@ -138,7 +138,7 @@ async def go_home(_, message: Message):
         reply_markup=InlineKeyboardMarkup(start_button()),
     )
 
-@VXSTORM.on_message(filters.regex(r"ᴄᴏɴɴᴇᴄᴛ ꜱᴇꜱꜱɪᴏɴ 📡") & Config.AUTH_USERS & filters.private)
+@VXSTORM.on_message(filters.regex(r"ᴄᴏɴɴᴇᴄᴛ ꜱᴇꜱꜱɪᴏɴ 📡") & filters.private)
 async def session_add(_, message: Message):
     await message.reply_text("/host {ʏᴏᴜʀ sᴇssɪᴏɴ}")  
     
