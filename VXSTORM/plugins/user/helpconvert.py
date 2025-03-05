@@ -25,7 +25,7 @@ async def alip(client: Client, message: Message):
     f"<b>•─╼⃝𖠁 ᴄᴏɴᴠᴇʀᴛ ᴄᴏᴍᴍᴀɴᴅꜱ 𖠁⃝╾─•</b>\n\n"
     f"🔹 <code>{hl}tts</code> » ᴛᴏ ᴄᴏɴᴠᴇʀᴛ ᴛᴇxᴛ ᴛᴏ ᴠᴏɪᴄᴇ\n"
     f"🔹 <code>{hl}quotly</code> » ᴛᴏ ᴄᴏɴᴠᴇʀᴛ ᴛᴇxᴛ ᴛᴏ Qᴜᴏᴛᴇ\n"
-    f"🔹 <code>{hl}clone</code> » ᴄʟᴏɴᴇ ʏᴏᴜʀꜱᴇʟꜰ ᴛᴏ ᴛᴀʀɢᴇᴛᴇᴅ ᴜꜱᴇʀ\n"
+    f"🔹 <code>{hl}clone</code> » ᴄʟᴏɴᴇ ᴛᴏ ᴛᴀʀɢᴇᴛᴇᴅ ᴜꜱᴇʀ\n"
     f"🔹 <code>{hl}revert</code> » ᴛᴏ ʀᴇᴠᴇʀᴛ ʏᴏᴜʀ ᴄʟᴏɴᴇ\n"
 )
     try:
