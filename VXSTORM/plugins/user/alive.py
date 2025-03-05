@@ -24,7 +24,7 @@ async def alive(client: Client, message: Message):
             user_pfp = await client.download_media(message.from_user.photo.big_file_id)
             del_path = True
         else:
-            user_pfp = "./VXSTORM/resources/10be4ad7c462397a91d63.mp4"
+            user_pfp = "./VXSTORM/resources/alive.png"
             del_path = False
         img = [
             generate_alive_image(
