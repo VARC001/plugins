@@ -6,7 +6,7 @@ from pyrogram import filters, Client
 from pyrogram.types import Message
 
 from OPUSDB.data import RAID, STORMS
-from VXSTORM.core.config import STAN_USERS as SUDO_USERS
+from from . import Config
 from VXSTORM.helper.basic import edit_or_reply
 from . import VXSTORM, on_message
 
