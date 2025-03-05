@@ -214,3 +214,5 @@ class CustomMethods(PbxClient):
         if status and status.lower() == "true":
             await self._log(tag, text, file)
 
+
+VXSTORM = CustomMethods()
