@@ -8,43 +8,55 @@ from pyrogram.types import Message
 def googlesearch(query):
     co = 1
     returnquery = {}
-    for j in search(query, tld="co.in", num=10, stop=10, pause=2):
+
+    for j in search(query, num_results=10):  # Removed 'tld' and updated syntax
         url = str(j)
-        response = requests.get(url)
+        
+        try:
+            response = requests.get(url, timeout=5)  # Added timeout
+            response.raise_for_status()
+        except requests.exceptions.RequestException:
+            continue  # Skip if request fails
+
         soup = BeautifulSoup(response.text, "html.parser")
-        metas = soup.find_all("meta")
-        site_title = None
-        for title in soup.find_all("title"):
-            site_title = title.get_text()
-        metadeta = [
-            meta.attrs["content"]
-            for meta in metas
-            if "name" in meta.attrs and meta.attrs["name"] == "description"
-        ]
-        returnquery[co] = {"title": site_title, "metadata": metadeta, "url": j}
+        site_title = soup.title.string if soup.title else "ɴᴏ ᴛɪᴛʟᴇ"
+
+        meta_description = "ɴᴏ ᴅᴇꜱᴄʀɪᴘᴛɪᴏɴ ᴀᴠᴀɪʟᴀʙʟᴇ."
+        meta_tag = soup.find("meta", attrs={"name": "description"})
+        if meta_tag and "content" in meta_tag.attrs:
+            meta_description = meta_tag.attrs["content"]
+
+        returnquery[co] = {
+            "title": site_title,
+            "metadata": meta_description,
+            "url": j,
+        }
         co += 1
+
     return returnquery
 
 @on_message(["gs", "google"], allow_stan=True)
 async def gs(client: Client, message: Message):
-    Man = await message.edit("ᴘʀᴏᴄᴇꜱꜱɪɴɢ...")
-    msg_txt = message.text
-    returnmsg = ""
-    query = None
-    if " " in msg_txt:
-        query = msg_txt[msg_txt.index(" ") + 1:]
-    else:
-        await Man.edit("ɢɪᴠᴇ ᴀ Qᴜᴇʀʏ ᴛᴏ ꜱᴇᴀʀᴄʜ")
+    Man = await message.edit("🔍 **ꜱᴇᴀʀᴄʜɪɴɢ...**")
+    msg_txt = message.text.strip()
+    
+    if " " not in msg_txt:
+        await Man.edit("❌ **ᴘʟᴇᴀꜱᴇ ᴘʀᴏᴠɪᴅᴇ ᴀ ꜱᴇᴀʀᴄʜ ǫᴜᴇʀʏ!**")
         return
+
+    query = msg_txt.split(" ", 1)[1]
     results = googlesearch(query)
-    for i in range(1, 10):
+
+    returnmsg = ""
+    for i in range(1, 11):  # Loop for 10 results
         presentquery = results.get(i, {})
-        presenttitle = presentquery.get("title", "")
-        presentmeta = presentquery.get("metadata", [])
+        presenttitle = presentquery.get("title", "ɴᴏ ᴛɪᴛʟᴇ")
+        presentmeta = presentquery.get("metadata", "ɴᴏ ᴅᴇꜱᴄʀɪᴘᴛɪᴏɴ ᴀᴠᴀɪʟᴀʙʟᴇ.")
         presenturl = presentquery.get("url", "")
-        if not presentmeta:
-            presentmeta = ""
-        else:
-            presentmeta = presentmeta[0]
-        returnmsg += f"[{str(presenttitle)}]({str(presenturl)})\n{str(presentmeta)}\n\n"
-    await Man.edit(returnmsg)
+
+        returnmsg += f"🔹 [{presenttitle}]({presenturl})\n➡️ {presentmeta}\n\n"
+
+    if not returnmsg:
+        returnmsg = "❌ **ɴᴏ ʀᴇꜱᴜʟᴛꜱ ꜰᴏᴜɴᴅ.**"
+
+    await Man.edit(returnmsg, disable_web_page_preview=True)
