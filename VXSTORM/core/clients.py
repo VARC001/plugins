@@ -58,13 +58,13 @@ class PbxClient(Client):  # Inherit from pyrogram.Client
             except Exception as e:
                 LOGS.error(f"{i + 1}: {e}")
                 continue
-
-    async def start_bot(self) -> None:
-        await self.start()  # Start the Pyrogram client
-        me = await self.get_me()
-        LOGS.info(
-            f"{Symbols.arrow_right * 2} ꜱᴛᴀʀᴛᴇᴅ VXSTORM ᴄʟɪᴇɴᴛ: '{me.username}' {Symbols.arrow_left * 2}"
-        )
+                
+                async def start_bot(self) -> None:
+                    await self.start() # Start the Pyrogram client
+                    me = await self.get_me()
+                    LOGS.info(
+                        f"{Symbols.arrow_right * 2} ꜱᴛᴀʀᴛᴇᴅ VXSTORM ᴄʟɪᴇɴᴛ: '{me.username}' {Symbols.arrow_left * 2}"
+                    )
 
     async def load_plugin(self) -> None:
         count = 0
