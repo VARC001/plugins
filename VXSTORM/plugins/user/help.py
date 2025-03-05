@@ -1,11 +1,15 @@
-from pyrogram import Client, filters
+import os
+import asyncio
+from pyrogram import Client
 from pyrogram.types import Message
+from VXSTORM.helper.core import ReplyCheck
+from VXSTORM.core import ENV
 from VXSTORM.helper.basic import edit_or_reply
-from . import *
+from . import Config, db, VXSTORM, on_message
+
+help_logo = "https://envs.sh/help.mp4"  # Change to an actual help image/video URL
 
 hl = "."
-HELP_PIC = "https://envs.sh/Pa1.mp4"  # Ensure this is a valid image/video URL if needed
-
 FIRST_TEXT = f"""
 ✨ **•─╼⃝𖠁 ʙᴏᴛ ʜᴇʟᴘ 𖠁⃝╾─•** ✨
 
@@ -24,7 +28,8 @@ FIRST_TEXT = f"""
 **🔹 ɪɴꜰᴏ ᴄᴏᴍᴍᴀɴᴅꜱ:** `{hl}helpinfo`  
 **🔹 ᴄʀᴇᴀᴛᴇ ᴄᴏᴍᴍᴀɴᴅꜱ:** `{hl}helpcreate`  
 **🔹 ᴘʀᴏꜰɪʟᴇ ᴄᴏᴍᴍᴀɴᴅꜱ:** `{hl}helpprofile`  
-**🔹 ᴡɪꜱʜ ᴄᴏᴍᴍᴀɴᴅꜱ:** `{hl}helpwish`    
+**🔹 ᴡɪꜱʜ ᴄᴏᴍᴍᴀɴᴅꜱ:** `{hl}helpwish`  
+**🔹 ꜰ-ᴀᴄᴛɪᴏɴ ᴄᴏᴍᴍᴀɴᴅꜱ:** `{hl}helpfaction`  
 **🔹 ᴠᴄ ᴄᴏᴍᴍᴀɴᴅꜱ:** `{hl}helpvc`  
 **🔹 ꜰᴜɴ ᴄᴏᴍᴍᴀɴᴅꜱ:** `{hl}helpfun`  
 **🔹 ꜰᴜɴ ᴄᴏᴍᴍᴀɴᴅꜱ 2:** `{hl}helpfuntwo`
@@ -32,9 +37,18 @@ FIRST_TEXT = f"""
 
 @on_message("help", allow_stan=True)
 async def help(client: Client, message: Message):
-    if HELP_PIC.endswith((".jpg", ".png")):
-        await client.send_photo(message.chat.id, HELP_PIC, caption=FIRST_TEXT)
-    elif HELP_PIC.endswith((".mp4", ".MP4")):
-        await client.send_video(message.chat.id, HELP_PIC, caption=FIRST_TEXT)
-    else:
-        await edit_or_reply(message, FIRST_TEXT)  # Using edit_or_reply for text response
+    X = await edit_or_reply(message, "✨")
+    await asyncio.sleep(1)
+    
+    send_media = client.send_video if help_logo.endswith(".mp4") else client.send_photo
+
+    try:
+        await send_media(
+            message.chat.id,
+            help_logo,
+            caption=FIRST_TEXT,
+            reply_to_message_id=ReplyCheck(message),
+        )
+        await X.delete()
+    except:
+        await X.edit(FIRST_TEXT, disable_web_page_preview=True)
