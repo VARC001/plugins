@@ -27,6 +27,7 @@ async def alip(client: Client, message: Message):
     f"🔹 <code>{hl}quotly</code> » ᴛᴏ ᴄᴏɴᴠᴇʀᴛ ᴛᴇxᴛ ᴛᴏ Qᴜᴏᴛᴇ\n"
     f"🔹 <code>{hl}clone</code> » ᴄʟᴏɴᴇ ᴛᴏ ᴛᴀʀɢᴇᴛᴇᴅ ᴜꜱᴇʀ\n"
     f"🔹 <code>{hl}revert</code> » ᴛᴏ ʀᴇᴠᴇʀᴛ ʏᴏᴜʀ ᴄʟᴏɴᴇ\n"
+    f"🔹 <code>{hl}save_profile</code> » ᴛᴏ ꜱᴀᴠᴇ ʏᴏᴜʀ ᴘʀᴏꜰɪʟᴇ\n"        
 )
     try:
       await sad(
