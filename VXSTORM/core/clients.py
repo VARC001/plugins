@@ -61,12 +61,13 @@ class PbxClient(Client):
                 LOGS.error(f"{i + 1}: {e}")
                 continue
 
-    async def start_bot(self) -> None:
-        await self.bot.start()
-        me = await self.bot.get_me()
+    async def startup(self) -> None:
         LOGS.info(
-            f"{Symbols.arrow_right * 2} ꜱᴛᴀʀᴛᴇᴅ VXSTORM ᴄʟɪᴇɴᴛ: '{me.username}' {Symbols.arrow_left * 2}"
+            f"{Symbols.bullet * 3} ꜱᴛᴀʀᴛɪɴɢ VXSTORM ᴄʟɪᴇɴᴛ & ᴜꜱᴇʀ {Symbols.bullet * 3}"
         )
+        await self.start_bot()
+        await self.start_user()
+        await self.load_plugin()
 
     async def load_plugin(self) -> None:
         count = 0
