@@ -33,7 +33,7 @@ class Config:
     CHROME_DRIVER = getenv(
         "CHROME_DRIVER", "/app/.chrome-for-testing/chromedriver-linux64/chromedriver"
     )
-    FONT_PATH = "./Pbxbot/resources/fonts/Montserrat.ttf"
+    FONT_PATH = "./VXSTORM/resources/fonts/Montserrat.ttf"
 
     # users config: do not edit
     AUTH_USERS = filters.user()
@@ -121,7 +121,7 @@ class Limits:
     StickerStaticLimit = 120
 
 class Symbols:
-    anchor = "✰"
+    anchor = "•"
     arrow_left = "«"
     arrow_right = "»"
     back = "ʙᴀᴄᴋ"
