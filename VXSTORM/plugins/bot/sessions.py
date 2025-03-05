@@ -120,7 +120,7 @@ async def rm_session_cb(client: Client, cb: CallbackQuery):
         )
 
     await db.rm_session(user_id)
-    await cb.answer("**ꜱᴇꜱꜱɪᴏɴ ᴅᴇʟᴇᴛᴇᴅ ꜰʀᴏᴍ ᴏʀ ᴅᴀᴛᴀʙᴀꜱᴇ**")
+    await cb.answer("ᴅᴇʟᴇᴛᴇᴅ ꜰʀᴏᴍ ᴏʀ ᴅᴀᴛᴀʙᴀꜱᴇ")
 
     for i in all_sessions:
         collection.append((i["user_id"], f"rm_session:{i['user_id']}"))
