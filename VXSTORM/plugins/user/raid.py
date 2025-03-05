@@ -6,7 +6,7 @@ from random import choice
 from pyrogram.errors import FloodWait
 from pyrogram.types import Message
 from pyrogram import filters, Client
-from VXSTORM.bad.sukh import *
+from OPUSDB.data import *
 from OPUSDB.data import RAID
 from . import *
 
