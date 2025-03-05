@@ -1,7 +1,8 @@
 import os
 from pyrogram import Client, filters
 from pyrogram.types import Message
-from .helper.basic import edit_or_reply, get_text, get_user
+from VXSTORM.helper.basic import edit_or_reply, get_text, get_user
+from . import VXSTORM, on_message
 
 OWNER = os.environ.get("OWNER", None)
 BIO = os.environ.get("BIO", "@STORM_CHATZ")
