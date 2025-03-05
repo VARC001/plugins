@@ -15,7 +15,7 @@ from .database import db
 from .logger import LOGS
 
 
-class PbxClient(Client):  # Inherit from pyrogram.Client
+class VXSTORM(Client):  # Inherit from pyrogram.Client
     def __init__(self) -> None:
         super().__init__(
             name="VXSTORM 1.0",  # Session name
