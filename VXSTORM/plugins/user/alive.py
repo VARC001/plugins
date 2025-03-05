@@ -4,13 +4,13 @@ import time
 import asyncio
 from pyrogram import Client
 from pyrogram.types import Message
-from helper.core import ReplyCheck
+from VXSTORM.helper.core import ReplyCheck
 from VXSTORM import START_TIME
 from VXSTORM.core import ENV
 from VXSTORM.functions.formatter import readable_time
 from VXSTORM.functions.images import generate_alive_image
 from VXSTORM.functions.templates import alive_template
-from helper.basic import edit_or_reply
+from VXSTORM.helper.basic import edit_or_reply
 from . import Config, db, VXSTORM, on_message
 
 alive_logo = "https://envs.sh/Pa1.mp4"
