@@ -1,5 +1,6 @@
 from pyrogram import Client, filters, enums
 from . import on_message
+from VXSTORM.helper.basic import edit_or_reply
 
 @on_message(["admins", "adminlist", "staff"], allow_stan=True)
 async def allstaff(client, message):
@@ -7,7 +8,9 @@ async def allstaff(client, message):
     admins = []
     bots = []
     deleted = []
-    ok = await message.edit("ꜰᴇᴛᴄʜɪɴɢ ᴀᴅᴍɪɴꜱ...")
+
+    ok = await edit_or_reply(message, "ꜰᴇᴛᴄʜɪɴɢ ᴀᴅᴍɪɴꜱ...")
+
     async for x in client.get_chat_members(message.chat.id, filter=enums.ChatMembersFilter.ADMINISTRATORS):
         if x.user.is_bot:
             bots.append(x.user.mention)
@@ -18,33 +21,22 @@ async def allstaff(client, message):
         else:
             admins.append(x.user.mention)
 
-    txt = f"**{message.chat.title} ꜱᴛᴀꜰꜰ :**"
-    txt += "\n\n"
-    txt += " 👑**ᴄʀᴇᴀᴛᴏʀ :**"
-    txt += "\n"
-    txt += f" • {creator}"
-    txt += "\n"
+    txt = f"**{message.chat.title} ꜱᴛᴀꜰꜰ :**\n\n"
+    txt += " 👑 **ᴄʀᴇᴀᴛᴏʀ:**\n"
+    txt += f" • {creator}\n"
+
     if admins:
-        txt += "\n"
-        txt += " 👨‍💻**ᴀᴅᴍɪɴꜱ :**"
-        txt += "\n"
-        for adm in admins:
-            txt += f" • {adm}"
-            txt += "\n"
+        txt += "\n 👨‍💻 **ᴀᴅᴍɪɴꜱ:**\n"
+        txt += "\n".join(f" • {adm}" for adm in admins)
+
     if bots:
-        txt += "\n"
-        txt += " 🤖**ʙᴏᴛꜱ :**"
-        txt += "\n"
-        for adm in bots:
-            txt += f" • {adm}"
-            txt += "\n"
+        txt += "\n\n 🤖 **ʙᴏᴛꜱ:**\n"
+        txt += "\n".join(f" • {bot}" for bot in bots)
+
     if deleted:
-        txt += "\n"
-        txt += " 👻**ᴀᴅᴍɪɴꜱ :**"
-        txt += "\n"
-        for adm in deleted:
-            txt += f" • **None**"
-            txt += "\n"
+        txt += "\n\n 👻 **ᴅᴇʟᴇᴛᴇᴅ ᴀᴅᴍɪɴꜱ:**\n"
+        txt += "\n".join(" • **None**" for _ in deleted)
+
     try:
         await ok.edit(txt)
     except:
