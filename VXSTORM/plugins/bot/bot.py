@@ -40,3 +40,23 @@ async def restart_clients(_, message: Message):
         LOGS.error(e)
 
     os.system(f"kill -9 {os.getpid()} && bash start.sh")
+
+
+@VXSTORM.on_message(filters.command("stop") & Config.AUTH_USERS)
+async def restart_clients(_, message: Message):
+    response = await message.reply_text("ʀᴇsᴛᴀʀᴛɪɴɢ...")
+    
+    try:
+        if HEROKU_APP:
+            try:
+                heroku = heroku3.from_key(Config.HEROKU_APIKEY)
+                app = heroku.apps()[Config.HEROKU_APPNAME]
+                app.restart()
+            except:
+                await restart()
+        else:
+            await restart()
+    except Exception as e:
+        LOGS.error(e)
+
+    os.system(f"kill -9 {os.getpid()}")
