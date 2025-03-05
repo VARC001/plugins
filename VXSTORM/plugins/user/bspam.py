@@ -2,7 +2,7 @@ import asyncio
 from random import choice
 from pyrogram import Client, filters
 from pyrogram.types import Message
-from STORMDB.data import STORMS, BDAY
+from OPUSDB.data import STORMS, BDAY
 from . import on_message
 
 @on_message("bspam", allow_stan=True)
