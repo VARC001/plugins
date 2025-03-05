@@ -2,15 +2,15 @@ from pyrogram import Client
 from pyrogram.types import Message
 
 from . import Config, db, VXSTORM, on_message
-
+from VXSTORM.helper.basic import edit_or_reply
 
 @on_message("sudolist", allow_stan=True)
 async def stanUsers(client: Client, message: Message):
-    Pbx = await VXSTORM.edit(message, "**ꜰᴇᴛᴄʜɪɴɢ ᴜꜱᴇʀꜱ**")
+    Pbx = await edit_or_reply(message, "**ꜰᴇᴛᴄʜɪɴɢ ᴜꜱᴇʀꜱ...**")
 
     users = await db.get_stans(client.me.id)
     if not users:
-        return await VXSTORM.delete(Pbx, "**0 ꜱᴜᴅᴏ ᴜꜱᴇʀꜱ ꜰᴏᴜɴᴅ**")
+        return await Pbx.edit("**0 ꜱᴜᴅᴏ ᴜꜱᴇʀꜱ ꜰᴏᴜɴᴅ**")
 
     text = f"**ꜱᴜᴅᴏʟɪꜱᴛ:** `{len(users)}`\n\n"
     for user in users:
@@ -30,7 +30,7 @@ async def stanUsers(client: Client, message: Message):
 async def addstan(client: Client, message: Message):
     if len(message.command) < 2:
         if not message.reply_to_message:
-            return await VXSTORM.delete(
+            return await edit_or_reply(
                 message,
                 "ʀᴇᴘʟʏ ᴛᴏ ᴀ ᴜꜱᴇʀ ᴏʀ ɢɪᴠᴇ ᴍᴇ ᴀ ᴜꜱᴇʀ ɪᴅ ᴛᴏ ᴀᴅᴅ ᴛʜᴇᴍ ᴀꜱ ᴀ ꜱᴜᴅᴏ ᴜꜱᴇʀ",
             )
@@ -39,18 +39,18 @@ async def addstan(client: Client, message: Message):
         try:
             user = await client.get_users(message.command[1])
         except Exception:
-            return await VXSTORM.delete(
+            return await edit_or_reply(
                 message, "ɢɪᴠᴇ ᴍᴇ ᴀ ᴠᴀʟɪᴅ ᴜꜱᴇʀ ɪᴅ ᴛᴏ ᴀᴅᴅ ᴛʜᴇᴍ ᴀꜱ ᴀ ꜱᴜᴅᴏ ᴜꜱᴇʀ"
             )
 
     if user.id == client.me.id:
-        return await VXSTORM.delete(message, "ɪ ᴄᴀɴ'ᴛ ʙᴇ ᴀ ᴀᴅᴅ ᴍʏꜱᴇʟꜰ")
+        return await edit_or_reply(message, "ɪ ᴄᴀɴ'ᴛ ᴀᴅᴅ ᴍʏꜱᴇʟꜰ")
 
     if await db.is_stan(client.me.id, user.id):
-        return await VXSTORM.delete(message, "ᴛʜɪꜱ ᴜꜱᴇʀ ɪꜱ ᴀʟʀᴇᴀᴅʏ ɪɴ ꜱᴜᴅᴏʟɪꜱᴛ")
+        return await edit_or_reply(message, "ᴛʜɪꜱ ᴜꜱᴇʀ ɪꜱ ᴀʟʀᴇᴀᴅʏ ɪɴ ꜱᴜᴅᴏʟɪꜱᴛ")
 
     await db.add_stan(client.me.id, user.id)
-    await VXSTORM.delete(message, f"ᴀᴅᴅᴇᴅ {user.mention} ᴀꜱ ᴀ ꜱᴜᴅᴏ ᴜꜱᴇʀ")
+    await edit_or_reply(message, f"ᴀᴅᴅᴇᴅ {user.mention} ᴀꜱ ᴀ ꜱᴜᴅᴏ ᴜꜱᴇʀ")
 
     Config.AUTH_USERS.add(user.id)
     Config.STAN_USERS.add(user.id)
