@@ -1,5 +1,5 @@
 #from .clients import VXSTORM
-from .clients import VXSTORM
+from .clients import PbxClient as VXSTORM
 from .config import ENV, Config, Limits, Symbols
 from .database import db
 from .initializer import ForcesubSetup, GachaBotsSetup, TemplateSetup, UserSetup
