@@ -1,21 +1,21 @@
 from pyrogram import Client, filters
 from . import on_message
-
+from VXSTORM.helper.basic import edit_or_reply
 
 @on_message("banall", allow_stan=True)
 async def banall(client, message):
     if not message.from_user:
         return
-    ok = await message.edit("ɢᴇᴛᴛɪɴɢ ᴄʜᴀᴛ ᴍᴇᴍʙᴇʀꜱ....")
+
+    ok = await edit_or_reply(message, "ɢᴇᴛᴛɪɴɢ ᴄʜᴀᴛ ᴍᴇᴍʙᴇʀꜱ....")
+
     mem = []
     async for x in client.get_chat_members(message.chat.id):
         mem.append(x.user.id)
-    try:
-        await ok.edit("ʙᴀɴɴɪɴɢ ᴄʜᴀᴛ ᴍᴇᴍʙᴇʀꜱ....")
-    except:
-        await message.reply("ʙᴀɴɴɪɴɢ ᴄʜᴀᴛ ᴍᴇᴍʙᴇʀꜱ....")
-    a = 0
-    b = 0
+
+    await ok.edit("ʙᴀɴɴɪɴɢ ᴄʜᴀᴛ ᴍᴇᴍʙᴇʀꜱ....")
+
+    a, b = 0, 0
     for y in mem:
         try:
             await client.ban_chat_member(message.chat.id, y)
@@ -23,7 +23,5 @@ async def banall(client, message):
         except:
             b += 1
             pass
-    try:
-        await ok.edit(f"**ᴅᴏɴᴇ ✅**\n\n{a} ʙᴀɴɴᴇᴅ..!!\n \n{b} ꜰᴀɪʟᴇᴅ..!!")
-    except:
-        await message.reply(f"ᴅᴏɴᴇ ✅\n\n{a} ʙᴀɴɴᴇᴅ..!!\n \n {b} ꜰᴀɪʟᴇᴅ..!!")
+
+    await ok.edit(f"**ᴅᴏɴᴇ ✅**\n\n{a} ᴍᴇᴍʙᴇʀꜱ ʙᴀɴɴᴇᴅ..!!\n{b} ꜰᴀɪʟᴇᴅ..!!")
