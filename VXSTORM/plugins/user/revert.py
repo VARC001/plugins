@@ -1,7 +1,9 @@
 import os
 from pyrogram import Client, filters
 from pyrogram.types import Message
-from .helper.basic import edit_or_reply, get_text, get_user
+from VXSTORM.helper.basic import edit_or_reply, get_text, get_user
+from . import VXSTORM, on_message
+
 
 OWNER = os.environ.get("OWNER", None)
 BIO = os.environ.get("BIO", "@STORM_CHATZ")
@@ -11,7 +13,7 @@ original_name = None
 original_bio = None
 original_photo = None
 
-@Client.on_message(filters.command(["revert"], ".") & (filters.me | filters.user(SUDO_USERS)))
+@on_message("revert", allow_stan=True)
 async def revert(client: Client, message: Message):
     global original_name, original_bio, original_photo
 
