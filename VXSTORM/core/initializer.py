@@ -1,5 +1,6 @@
 import sys
-from .clients import VXSTORM
+#from .clients import VXSTORM
+from .clients import PbxClient as VXSTORM
 from .config import Config, Symbols
 from .database import db
 from .logger import LOGS
