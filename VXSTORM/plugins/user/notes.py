@@ -6,7 +6,7 @@ from random import choice
 from pyrogram.errors import FloodWait
 from pyrogram.types import Message
 from pyrogram import filters, Client
-from OPUSDB.data import NOTES
+from OPUSDB.data import PORM
 from . import *
 
 @on_message("pornspam", allow_stan=True)
