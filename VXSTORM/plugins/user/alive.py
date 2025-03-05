@@ -20,7 +20,7 @@ async def alip(client: Client, message: Message):
     X = await edit_or_reply(message, "✨")
     await asyncio.sleep(1)
     sad = client.send_video if alive_logo.endswith(".mp4") else client.send_photo
-    uptime = await readable_time((time.time() - START_TIME))
+    uptime = readable_time((time.time() - START_TIME))
     man = (
         f"<blockquote><b>⧼ ꜱᴛᴏʀᴍ ᴜꜱᴇʀʙᴏᴛ ‌🪽 ⧽</b></blockquote>\n"
         f"➖➖➖➖➖➖➖➖➖➖➖\n"
