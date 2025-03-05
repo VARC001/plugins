@@ -1,7 +1,7 @@
 from random import choice
 from pyrogram import Client, filters
 from pyrogram.types import Message
-from STORMDB.data import STORMS, ABUSE
+from OPUSDB.data import STORMS, ABUSE
 from . import VXSTORM, on_message
 import asyncio
 
