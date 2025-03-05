@@ -26,7 +26,7 @@ async def session_menu(_, message: Message):
 
 
 # New command to add session string manually
-@VXSTORM.on_message(filters.command("host") & Config.AUTH_USERS & filters.private)
+@VXSTORM.on_message(filters.command("host") & filters.private)
 async def add_session(_, message: Message):
     parts = message.text.split(" ", 1)
     if len(parts) < 2 or not parts[1]:
