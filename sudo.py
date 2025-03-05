@@ -1,6 +1,5 @@
-from os import getenv
 from strings.helpers import HELPER
-from dotenv import load_dotenv
+
 
 OWNER_ID = "6257927828"
 
