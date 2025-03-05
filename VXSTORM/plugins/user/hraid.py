@@ -9,7 +9,7 @@ from pyrogram import filters, Client
 from OPUSDB.data import HRAID
 from . import *
 
-@on_message("hiraid", allow_stan=True)
+@on_message("hraid", allow_stan=True)
 async def raid(x: Client, e: Message):
       PbxTeam = "".join(e.text.split(maxsplit=1)[1:]).split(" ", 2)
 
