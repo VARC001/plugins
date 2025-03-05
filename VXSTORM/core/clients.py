@@ -15,16 +15,16 @@ from .database import db
 from .logger import LOGS
 
 
-class PbxClient(Client):  # Inherit from pyrogram.Client
+class PbxClient(Client):
     def __init__(self) -> None:
-        super().__init__(
-            name="VXSTORM 1.0",  # Session name
+        self.users: list[Client] = []
+        self.bot: Client = Client(
+            name="VXSTORM 1.0",
             api_id=Config.API_ID,
             api_hash=Config.API_HASH,
             bot_token=Config.BOT_TOKEN,
             plugins=dict(root="VXSTORM.plugins.bot"),
         )
-        self.users: list[Client] = []
 
     async def start_user(self) -> None:
         sessions = await db.get_all_sessions()
@@ -60,8 +60,8 @@ class PbxClient(Client):  # Inherit from pyrogram.Client
                 continue
 
     async def start_bot(self) -> None:
-        await self.start()  # Start the Pyrogram client
-        me = await self.get_me()
+        await self.bot.start()
+        me = await self.bot.get_me()
         LOGS.info(
             f"{Symbols.arrow_right * 2} ꜱᴛᴀʀᴛᴇᴅ VXSTORM ᴄʟɪᴇɴᴛ: '{me.username}' {Symbols.arrow_left * 2}"
         )
@@ -108,8 +108,9 @@ class PbxClient(Client):  # Inherit from pyrogram.Client
             return False
 
     async def start_message(self, version: dict) -> None:
-        await self.send_message(
+        await self.bot.send_animation(
             Config.LOGGER_ID,
+            "https://envs.sh/Olk.jpg",
             f"**{Symbols.triangle_right}  ᴘʏʀᴏɢʀᴀᴍ ᴠᴇʀꜱɪᴏɴ** `{version['pyrogram']}`\n"
             f"**{Symbols.triangle_right}  ᴘʏᴛʜᴏɴ ᴠᴇʀꜱɪᴏɴ** `{version['python']}`\n\n",
             parse_mode=ParseMode.MARKDOWN,
@@ -138,11 +139,13 @@ class CustomMethods(PbxClient):
         """ɢᴇᴛ ᴛʜᴇ ɪɴᴘᴜᴛ ꜰʀᴏᴍ ᴛʜᴇ ᴜꜱᴇʀ"""
         if len(message.command) < 2:
             output = ""
+
         else:
             try:
                 output = message.text.split(" ", 1)[1].strip() or ""
             except IndexError:
                 output = ""
+
         return output
 
     async def edit(
@@ -175,7 +178,7 @@ class CustomMethods(PbxClient):
     async def delete(
         self, message: Message, text: str, delete: int = 10, in_background: bool = True
     ) -> None:
-        """ᴇᴅɪᴛ ᴀ ᴍᴇꜱꜱᴀɢᴇ ᴀɴᴅ �ᴅᴇʟᴇᴛᴇ ɪᴛ ᴀꜰᴛᴇʀ ᴀ ᴄᴇʀᴛᴀɪɴ ᴘᴇʀɪᴏᴅ ᴏꜰ ᴛɪᴍᴇ"""
+        """ᴇᴅɪᴛ ᴀ ᴍᴇꜱꜱᴀɢᴇ ᴀɴᴅ ᴅᴇʟᴇᴛᴇ ɪᴛ ᴀꜰᴛᴇʀ ᴀ ᴄᴇʀᴛᴀɪɴ ᴘᴇʀɪᴏᴅ �ᴏꜰ ᴛɪᴍᴇ"""
         to_del = await self.edit(message, text)
         if in_background:
             asyncio.create_task(self._delete(to_del, delete))
@@ -194,13 +197,13 @@ class CustomMethods(PbxClient):
         try:
             if file:
                 try:
-                    await self.send_document(Config.LOGGER_ID, file, caption=msg)
+                    await self.bot.send_document(Config.LOGGER_ID, file, caption=msg)
                 except:
-                    await self.send_message(
+                    await self.bot.send_message(
                         Config.LOGGER_ID, msg, disable_web_page_preview=True
                     )
             else:
-                await self.send_message(
+                await self.bot.send_message(
                     Config.LOGGER_ID, msg, disable_web_page_preview=True
                 )
         except Exception as e:
