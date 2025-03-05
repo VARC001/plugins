@@ -11,7 +11,7 @@ from ..btnsG import start_button
 from . import START_MSG, Config, VXSTORM
 
 
-@VXSTORM.on_message(filters.command("start") & Config.AUTH_USERS)
+@VXSTORM.on_message(filters.command("start"))
 async def start_pm(_, message: Message):
     btns = start_button()
 
@@ -22,7 +22,7 @@ async def start_pm(_, message: Message):
     )
 
 
-@VXSTORM.on_message(filters.command("restart") & Config.AUTH_USERS)
+@VXSTORM.on_message(filters.command("update") & Config.AUTH_USERS)
 async def restart_clients(_, message: Message):
     response = await message.reply_text("ʀᴇsᴛᴀʀᴛɪɴɢ...")
     
