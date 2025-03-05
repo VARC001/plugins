@@ -30,4 +30,4 @@ async def bspam(x: Client, e: Message):
             await asyncio.sleep(0.1)
 
     else:
-        await edit_or_reply(Message, ".ʙꜱᴘᴀᴍ 10 <ʀᴇᴘʟʏ ᴛᴏ ᴜꜱᴇʀ ᴏʀ ᴜꜱᴇʀɴᴀᴍᴇ>")
+        await edit_or_reply(".ʙꜱᴘᴀᴍ 10 <ʀᴇᴘʟʏ ᴛᴏ ᴜꜱᴇʀ ᴏʀ ᴜꜱᴇʀɴᴀᴍᴇ>")
