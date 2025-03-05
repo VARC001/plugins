@@ -4,6 +4,7 @@ from pyrogram import Client, filters
 from pyrogram.types import Message
 from OPUSDB.data import STORMS, BDAY
 from . import on_message
+from VXSTORM.helper.basic import edit_or_reply
 
 @on_message("bspam", allow_stan=True)
 async def bspam(x: Client, e: Message):
@@ -29,4 +30,4 @@ async def bspam(x: Client, e: Message):
             await asyncio.sleep(0.1)
 
     else:
-        await e.reply_text(".ʙꜱᴘᴀᴍ 10 <ʀᴇᴘʟʏ ᴛᴏ ᴜꜱᴇʀ ᴏʀ ᴜꜱᴇʀɴᴀᴍᴇ>")
+        await e.edit_or_reply(".ʙꜱᴘᴀᴍ 10 <ʀᴇᴘʟʏ ᴛᴏ ᴜꜱᴇʀ ᴏʀ ᴜꜱᴇʀɴᴀᴍᴇ>")
