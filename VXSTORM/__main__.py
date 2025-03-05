@@ -15,7 +15,7 @@ from VXSTORM.functions.utility import BList, Flood, TGraph
 
 
 async def main():
-    await VXSTORM.start_bot() # Use the startup method
+    await VXSTORM.startup()
     await db.connect()
     await UserSetup()
     await ForcesubSetup()
@@ -30,4 +30,4 @@ async def main():
 
 
 if __name__ == "__main__":
-    VXSTORM.run(main)  # Pass the coroutine function, not the result of calling it
+    VXSTORM.run(main())
