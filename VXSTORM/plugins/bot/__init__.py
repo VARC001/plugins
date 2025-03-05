@@ -1,5 +1,5 @@
 #from VXSTORM.core.clients import VXSTORM
-from .clients import PbxClient as VXSTORM
+from .clients import VXSTORM
 from VXSTORM.core.config import Config, Symbols
 from VXSTORM.core.database import db
 
