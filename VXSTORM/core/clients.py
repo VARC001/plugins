@@ -58,13 +58,13 @@ class PbxClient(Client):  # Inherit from pyrogram.Client
             except Exception as e:
                 LOGS.error(f"{i + 1}: {e}")
                 continue
-                
-                async def start_bot(self) -> None:
-                    await self.start() # Start the Pyrogram client
-                    me = await self.get_me()
-                    LOGS.info(
-                        f"{Symbols.arrow_right * 2} ꜱᴛᴀʀᴛᴇᴅ VXSTORM ᴄʟɪᴇɴᴛ: '{me.username}' {Symbols.arrow_left * 2}"
-                    )
+
+    async def start_bot(self) -> None:
+        await self.start()  # Start the Pyrogram client
+        me = await self.get_me()
+        LOGS.info(
+            f"{Symbols.arrow_right * 2} ꜱᴛᴀʀᴛᴇᴅ VXSTORM ᴄʟɪᴇɴᴛ: '{me.username}' {Symbols.arrow_left * 2}"
+        )
 
     async def load_plugin(self) -> None:
         count = 0
@@ -101,7 +101,7 @@ class PbxClient(Client):  # Inherit from pyrogram.Client
 
     async def join_logger(self, client: Client) -> bool:
         try:
-            invite_link = await self.bot.export_chat_invite_link(Config.LOGGER_ID)
+            invite_link = await self.export_chat_invite_link(Config.LOGGER_ID)
             await client.join_chat(invite_link)
             return True
         except Exception:
@@ -117,8 +117,8 @@ class PbxClient(Client):  # Inherit from pyrogram.Client
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton("ꜱᴜᴘᴘᴏʀᴛ",  url="https://t.me/STORM_CORE"),
-                        InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇꜱ",  url="https://t.me/STORM_TECHH"),
+                        InlineKeyboardButton("ꜱᴜᴘᴘᴏʀᴛ", url="https://t.me/STORM_CORE"),
+                        InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇꜱ", url="https://t.me/STORM_TECHH"),
                     ]
                 ]
             ),
@@ -175,7 +175,7 @@ class CustomMethods(PbxClient):
     async def delete(
         self, message: Message, text: str, delete: int = 10, in_background: bool = True
     ) -> None:
-        """ᴇᴅɪᴛ ᴀ ᴍᴇꜱꜱᴀɢᴇ ᴀɴᴅ �ᴅᴇʟᴇᴛᴇ ɪᴛ ᴀꜰᴛᴇʀ ᴀ ᴄᴇʀᴛᴀɪɴ ᴘᴇʀɪᴏᴅ ᴏꜰ ᴛɪᴍᴇ"""
+        """ᴇᴅɪᴛ ᴀ ᴍᴇꜱꜱᴀɢᴇ ᴀɴᴅ ᴅᴇʟᴇᴛᴇ ɪᴛ ᴀꜰᴛᴇʀ ᴀ ᴄᴇʀᴛᴀɪɴ ᴘᴇʀɪᴏᴅ ᴏꜰ ᴛɪᴍᴇ"""
         to_del = await self.edit(message, text)
         if in_background:
             asyncio.create_task(self._delete(to_del, delete))
@@ -213,4 +213,3 @@ class CustomMethods(PbxClient):
         status = await db.get_env(ENV.is_logger)
         if status and status.lower() == "true":
             await self._log(tag, text, file)
-
