@@ -1,4 +1,3 @@
-import asyncio
 from pyrogram import idle
 
 from VXSTORM import __version__
@@ -16,11 +15,7 @@ from VXSTORM.functions.utility import BList, Flood, TGraph
 
 
 async def main():
-    # Initialize the VXSTORM client
-    client = VXSTORM()
-
-    # Perform startup tasks
-    await client.startup()  # Use the startup method
+    await VXSTORM.startup()  # Use the startup method
     await db.connect()
     await UserSetup()
     await ForcesubSetup()
@@ -30,12 +25,9 @@ async def main():
     await BList.updateBlacklists()
     await TGraph.setup()
     await initialize_git(Config.PLUGINS_REPO)
-    await client.start_message(__version__)
-
-    # Keep the client running
+    await VXSTORM.start_message(__version__)
     await idle()
 
 
 if __name__ == "__main__":
-    # Run the main coroutine
-    asyncio.run(main())
+    VXSTORM.run(main())
