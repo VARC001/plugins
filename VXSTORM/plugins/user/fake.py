@@ -1,4 +1,4 @@
-from pyrogram import Client, enums, filters
+"""from pyrogram import Client, enums, filters
 from pyrogram.raw import functions
 from pyrogram.types import Message
 from VXSTORM.data.actions_store import commands
@@ -45,3 +45,4 @@ async def actions(client: Client, message: Message):
             f"**ᴇʀʀᴏʀ »** `{e}`",
             reply_to_message_id=ReplyCheck(message),
         )
+"""
