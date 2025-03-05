@@ -25,6 +25,8 @@ class PbxClient(Client):
             bot_token=Config.BOT_TOKEN,
             plugins=dict(root="VXSTORM.plugins.bot"),
         )
+        # Initialize the dispatcher for the bot
+        self.dispatcher = self.bot.dispatcher
 
     async def start_user(self) -> None:
         sessions = await db.get_all_sessions()
@@ -136,16 +138,14 @@ class PbxClient(Client):
 
 class CustomMethods(PbxClient):
     async def input(self, message: Message) -> str:
-        """ɢᴇᴛ ᴛʜᴇ ɪɴᴘᴜᴛ ꜰʀᴏᴍ ᴛʜᴇ ᴜꜱᴇʀ"""
+        """ɢᴇᴛ ᴛʜᴇ ɪɴᴘᴜᴛ ꜰʀᴏᴍ ᴛʜᴇ �ꜱᴇʀ"""
         if len(message.command) < 2:
             output = ""
-
         else:
             try:
                 output = message.text.split(" ", 1)[1].strip() or ""
             except IndexError:
                 output = ""
-
         return output
 
     async def edit(
@@ -178,7 +178,7 @@ class CustomMethods(PbxClient):
     async def delete(
         self, message: Message, text: str, delete: int = 10, in_background: bool = True
     ) -> None:
-        """ᴇᴅɪᴛ ᴀ ᴍᴇꜱꜱᴀɢᴇ ᴀɴᴅ ᴅᴇʟᴇᴛᴇ ɪᴛ ᴀꜰᴛᴇʀ ᴀ ᴄᴇʀᴛᴀɪɴ ᴘᴇʀɪᴏᴅ �ᴏꜰ ᴛɪᴍᴇ"""
+        """ᴇᴅɪᴛ ᴀ ᴍᴇꜱꜱᴀɢᴇ ᴀɴᴅ ᴅᴇʟᴇᴛᴇ ɪᴛ ᴀꜰᴛᴇʀ ᴀ ᴄᴇʀᴛᴀɪɴ ᴘᴇʀɪᴏᴅ ᴏꜰ ᴛɪᴍᴇ"""
         to_del = await self.edit(message, text)
         if in_background:
             asyncio.create_task(self._delete(to_del, delete))
@@ -192,7 +192,7 @@ class CustomMethods(PbxClient):
             asyncio.create_task(self._delete(to_del, delete))
 
     async def _log(self, tag: str, text: str, file: str = None) -> None:
-        """ʟᴏɢ ᴀ ᴍᴇꜱꜱᴀɢᴇ ᴛᴏ ᴛʜᴇ ʟᴏɢɢᴇʀ ɢʀᴏᴜᴘ"""
+        """ʟᴏɢ ᴀ ᴍᴇꜱꜱᴀɢᴇ ᴛᴏ �ᴛʜᴇ ʟᴏɢɢᴇʀ ɢʀᴏᴜᴘ"""
         msg = f"**#{tag.upper()}**\n\n{text}"
         try:
             if file:
