@@ -1,7 +1,7 @@
 from pyrogram import Client, enums, filters
 from pyrogram.raw import functions
 from pyrogram.types import Message
-from VXSTORM.Data.actions_store import commands
+from VXSTORM.data.actions_store import commands
 from VXSTORM.helper.core import ReplyCheck
 from asyncio import sleep
 from . import *
